@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./pages/NavBra";
+import Home from "./pages/HomePage";
+import Projecten from "./pages/DetailPage";
+import NoPage from "./pages/NotFoundPage";
+import ContactForm from "./pages/Cantact";
+import "./App.css"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<Home />} />
+                    <Route path="portfolio" element={<Projecten />} />
+                    <Route path="contact" element={<ContactForm />} />
+                    <Route path="*" element={<NoPage />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
-export default App;
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
